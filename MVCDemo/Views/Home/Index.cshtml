@@ -23,8 +23,7 @@
                 <th>@memberstate.UserId</th>
                 <th>@memberstate.nickName</th>
                 <th>@memberstate.CardLevel</th>
-                <th>
-                <th>
+                <th>@Html.ActionLink("編輯", "EditMemberState", new { id = memberstate.Id})<th>
             </tr>
         }
 

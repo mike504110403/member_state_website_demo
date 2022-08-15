@@ -10,6 +10,8 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
+
+        //-------------------------首頁------------------------------
         public ActionResult Index()
         {
             dbManager memberstate = new dbManager();
@@ -18,6 +20,7 @@ namespace MVCDemo.Controllers
             return View();
         }
 
+        //--------------------------創建帳號頁-------------------------
         public ActionResult CreateAccount()
         {
             return View();
@@ -35,6 +38,14 @@ namespace MVCDemo.Controllers
                 Console.WriteLine(e.ToString());
             }
             return RedirectToAction("Index");
+        }
+
+        //---------------------修改帳號頁-----------------------
+        public ActionResult EditMemberState(int id)
+        {
+            dbManager dbmanager = new dbManager();
+            MemberState memberState = dbmanager.GetMemberStateById(id);
+            return View(memberState);
         }
     }
 

@@ -45,6 +45,38 @@ namespace MVCDemo.Models
             return memberStates; // 回傳memberstates list
         }
 
+        // 用Id 找資料
+        public MemberState GetMemberStateById(int id)
+        {
+            MemberState memberState = new MemberState();
+
+            // 連線sql
+            SqlConnection sqlConnection = new SqlConnection // 從web.config取連線字串，將連線動作指向變數
+                (ConfigurationManager.ConnectionStrings["MemberDB"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM tmember WHERE id = @id"); // 取出tmember id 符合的 row
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@id", id));
+            sqlConnection.Open(); //連線並開啟資料庫
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    memberState = new MemberState
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        nickName = reader.GetString(reader.GetOrdinal("nickName")),
+                        UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                        CardLevel = reader.GetString(reader.GetOrdinal("CardLevel"))
+                    };
+                }
+            }
+            else { memberState.UserId = "未找到該筆資料"; }
+            sqlConnection.Close();
+            return memberState;
+        }
+
         // 新增資料
         public void NewMember(MemberState memberState)
         {

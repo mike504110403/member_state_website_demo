@@ -1,0 +1,31 @@
+﻿@model MVCDemo.Models.MemberState
+@{
+    ViewBag.Title = "修改會員資料";
+}
+
+<h2>修改會員資料</h2>
+<br />
+
+<form method="post" action="/Home/EditMemberState">
+    <div class="form-group row">
+        <label for="Id" class="col-sm-2">會員編號</label>
+        <div class="col-sm-10">
+            <input type="text" id="Id" name="Id" class="form-control" value="@Model.Id" readonly />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="UserId" class="col-sm-2">會員帳號</label>
+        <div class="col-sm-10">
+            <input type="text" id="UserId" name="UserId" class="form-control" value="@Model.UserId"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="nickName" class="col-sm-2">會員暱稱</label>
+        <div class="col-sm-10">
+            <input type="text" id="nickName" name="nickName" class="form-control" value="@Model.nickName" />
+        </div>
+    </div>
+
+    <input class="btn btn-default" type="submit" value="加入會員" />
+</form>
+
