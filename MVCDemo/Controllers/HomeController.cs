@@ -6,12 +6,36 @@ using System.Web.Mvc;
 using MVCDemo.Models;
 
 
-
 namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Index()
+        {
+            dbManager memberstate = new dbManager();
+            List<MemberState> MemberStates = memberstate.GetMemberStates();
+            ViewBag.MemberStates = MemberStates;
+            return View();
+        }
 
+        public ActionResult CreateAccount()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateAccount(MemberState memberState)
+        {
+            dbManager dbmanager = new dbManager();
+            try
+            {
+                dbmanager.NewMember(memberState);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return RedirectToAction("Index");
+        }
     }
 
 }
