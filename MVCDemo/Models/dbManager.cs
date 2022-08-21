@@ -77,6 +77,61 @@ namespace MVCDemo.Models
             return memberState;
         }
 
+        // 找帳號驗證登入
+        public MemberState GetMemberByAccountandPassword(string userid, string password)
+        {
+            MemberState memberState = new MemberState();
+            // 連線sql
+            SqlConnection sqlConnection = new SqlConnection // 從web.config取連線字串，將連線動作指向變數
+                (ConfigurationManager.ConnectionStrings["MemberDB"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand    // 取出tmember userid,password 符合的 row
+                ("SELECT * FROM tmember WHERE userid = @userid AND password = @password");
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@userid", userid));
+            sqlCommand.Parameters.Add(new SqlParameter("@password", password));
+            sqlConnection.Open(); //連線並開啟資料庫
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    memberState = new MemberState
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        nickName = reader.GetString(reader.GetOrdinal("nickName")),
+                        UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                        CardLevel = reader.GetString(reader.GetOrdinal("CardLevel"))
+                    };
+                }
+            }
+            else { memberState.UserId = "不存在"; }
+            sqlConnection.Close();
+            return memberState;
+        }
+
+        // 驗證帳號是否存在
+        public bool IsUserIdExist(string userid)
+        {
+            MemberState memberState = new MemberState();
+
+            // 連線sql
+            SqlConnection sqlConnection = new SqlConnection // 從web.config取連線字串，將連線動作指向變數
+                (ConfigurationManager.ConnectionStrings["MemberDB"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM tmember WHERE userid = @userid"); // 取出tmember id 符合的 row
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@userid", userid));
+            sqlConnection.Open(); //連線並開啟資料庫
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else { return false; }
+            sqlConnection.Close();
+
+        }
         // 新增資料
         public void NewMember(MemberState memberState)
         {
@@ -91,8 +146,41 @@ namespace MVCDemo.Models
             sqlCommand.Parameters.Add(new SqlParameter("@UserId", memberState.UserId));
             sqlCommand.Parameters.Add(new SqlParameter("@Password", memberState.Password));
             sqlCommand.Parameters.Add(new SqlParameter("@nickName", memberState.nickName));
-            sqlCommand.Parameters.Add(new SqlParameter("@CardLevel", "1"));
+            sqlCommand.Parameters.Add(new SqlParameter("@CardLevel", "1")); // 一開始建立資料卡別給1
 
+            sqlConnection.Open(); //連線並開啟資料庫
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+
+        // 修改資料
+        public void UpdateMember(MemberState memberState)
+        {
+            // 連線sql
+            SqlConnection sqlConnection = new SqlConnection // 從web.config取連線字串，將連線動作指向變數
+                (ConfigurationManager.ConnectionStrings["MemberDB"].ConnectionString);
+
+            SqlCommand sqlCommand = new SqlCommand(@"UPDATE tmember SET UserId = @UserId,
+                                    nickName = @nickName WHERE Id = @Id"); // update tmember // 使用sql paramter避免injection
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@UserId", memberState.UserId));
+            sqlCommand.Parameters.Add(new SqlParameter("@nickName", memberState.nickName));
+            sqlCommand.Parameters.Add(new SqlParameter("@Id", memberState.Id));
+
+            sqlConnection.Open(); //連線並開啟資料庫
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+
+        // 刪除資料
+        public void DeleteMemberStateById(int id)
+        {
+            // 連線sql
+            SqlConnection sqlConnection = new SqlConnection // 從web.config取連線字串，將連線動作指向變數
+                (ConfigurationManager.ConnectionStrings["MemberDB"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("DELETE FROM tmember WHERE id = @id"); // 取出tmember id 符合的 row
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@id", id));
             sqlConnection.Open(); //連線並開啟資料庫
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();

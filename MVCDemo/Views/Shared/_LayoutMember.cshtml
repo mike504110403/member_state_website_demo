@@ -1,15 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - MVC Demo</title>
+    <title>@ViewBag.Title - Demo MVC</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="其他選項">
@@ -17,13 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("首頁", "Index", "Member", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首頁", "Index", "Home")</li>
-                    <li>@Html.ActionLink("註冊", "CreateAccount", "Home")</li>
-                    <li>@Html.ActionLink("登入", "Login", "Home")</li>
+                    <li>@Html.ActionLink("會員狀態", "MemberState", "Member")</li>
+                    <li>@Html.ActionLink("登出", "Logout", "Member")</li>
+                    <li><a href="#">@Session["Welcome"]</a></li>
                 </ul>
             </div>
         </div>
@@ -32,7 +32,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - MVC Demo</p>
+            <p>&copy; @DateTime.Now.Year - Demo MVC</p>
         </footer>
     </div>
 

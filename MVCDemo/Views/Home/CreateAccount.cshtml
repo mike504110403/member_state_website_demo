@@ -1,30 +1,35 @@
 ﻿
 @{
-    ViewBag.Title = "加入會員";
+    ViewBag.Title = "會員註冊";
 }
 
-<h2>加入會員</h2>
+<h2>會員註冊</h2>
 <br />
 
 <form method="post" action="/Home/CreateAccount">
     <div class="form-group row">
-        <label for="UserId" class="col-sm-2">會員帳號</label>
+        <label for="UserId" class="col-sm-2">帳號</label>
         <div class="col-sm-10">
             <input type="text" id="UserId" name="UserId" class="form-control" />
         </div>
     </div>
     <div class="form-group row">
-        <label for="nickName" class="col-sm-2">會員暱稱</label>
-        <div class="col-sm-10">
-            <input type="text" id="nickName" name="nickName" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="Password" class="col-sm-2">會員密碼</label>
+        <label for="Password" class="col-sm-2">密碼</label>
         <div class="col-sm-10">
             <input type="text" id="Password" name="Password" class="form-control" />
         </div>
     </div>
-    <input class="btn btn-default" type="submit" value="加入會員" />
+    <div class="form-group row">
+        <label for="nickName" class="col-sm-2">暱稱</label>
+        <div class="col-sm-10">
+            <input type="text" id="nickName" name="nickName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input class="btn btn-default" type="submit" value="加入會員" />
+            @ViewBag.Message
+        </div>
+    </div>
 </form>
 

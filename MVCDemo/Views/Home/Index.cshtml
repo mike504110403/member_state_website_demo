@@ -23,7 +23,11 @@
                 <th>@memberstate.UserId</th>
                 <th>@memberstate.nickName</th>
                 <th>@memberstate.CardLevel</th>
-                <th>@Html.ActionLink("編輯", "EditMemberState", new { id = memberstate.Id})<th>
+                <th>
+                    @Html.ActionLink("編輯", "EditMemberState", new { id = memberstate.Id })
+                    |
+                    @Html.ActionLink("刪除", "DeleteMember", new { id = memberstate.Id })
+                <th>
             </tr>
         }
 
