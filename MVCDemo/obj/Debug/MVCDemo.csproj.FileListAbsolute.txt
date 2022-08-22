@@ -101,3 +101,4 @@ D:\MVC\Practice\MVCDemo\MVCDemo\bin\zh-Hant\EntityFramework.resources.dll
 D:\MVC\Practice\MVCDemo\MVCDemo\bin\Dapper.dll
 D:\MVC\Practice\MVCDemo\MVCDemo\bin\Dapper.xml
 D:\MVC\Practice\MVCDemo\MVCDemo\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+D:\MVC\Practice\MVCDemo\MVCDemo\bin\Json.Net.dll

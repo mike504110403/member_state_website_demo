@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Demo";
+}
+
+
+
+<div id="body">
+    <h2>利用jQuery透過Web API進行CRUD</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>nickName</th>
+                <th>UserId</th>
+                <th>CardLevel</th>
+            </tr>
+        </thead>
+        <tbody id="dataList">
+        </tbody>
+    </table>
+    <hr />
+    <table>
+        <tr>
+            <td style="text-align: right;">Id</td>
+            <td>
+                <input type="text" id="Id" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">nickName</td>
+            <td>
+                <input type="text" id="nickName" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">UserId</td>
+            <td>
+                <input type="text" id="UserId" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">CardLevel</td>
+            <td>
+                <input type="text" id="CardLevel" />
+            </td>
+        </tr>
+    </table>
+    <input type="button" id="post" value="新增" />
+    <input type="button" id="get" value="查詢" />
+    <input type="button" id="delete" value="刪除" />
+    <input type="button" id="update" value="修改" />
+</div>
