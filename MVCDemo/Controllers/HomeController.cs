@@ -39,7 +39,7 @@ namespace MVCDemo.Controllers
                 {
                     Console.WriteLine(e.ToString());
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             else
             {

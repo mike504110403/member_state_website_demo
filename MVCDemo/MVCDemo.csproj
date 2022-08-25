@@ -202,6 +202,8 @@
     <Content Include="Views\Shared\_LayoutMember.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\View.cshtml" />
+    <Content Include="Views\Member\MemberState.cshtml" />
+    <Content Include="Views\Member\EditMemberState.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

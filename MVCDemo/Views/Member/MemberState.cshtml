@@ -1,0 +1,28 @@
+﻿@using MVCDemo.Models;
+@{
+    MemberState memberstate = ViewBag.memberState;
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>會員編號</th>
+            <th>會員帳號</th>
+            <th>會員暱稱</th>
+            <th>會員等級</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <th>@memberstate.Id</th>
+            <th>@memberstate.UserId</th>
+            <th>@memberstate.nickName</th>
+            <th>@memberstate.CardLevel</th>
+            <th>
+                @Html.ActionLink("編輯", "EditMemberState", new { id = memberstate.Id })
+            <th>
+        </tr>
+    </tbody>
+</table>
